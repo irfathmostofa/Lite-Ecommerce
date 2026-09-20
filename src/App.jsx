@@ -94,7 +94,7 @@ function Nav() {
 }
 
 function Hero() {
-  const lines = ['আপনার দোকান চালান সহজে।', 'বিক্রি, ডেলিভারি আর হিসাব একসাথে।']
+  const lines = ['আপনার ব্যবসা পরিচালনা করুন সহজে।', 'বিক্রি, ডেলিভারি আর হিসাব সব একসাথে।']
   return (
     <section id="top" className="relative overflow-hidden">
       <motion.div
@@ -136,9 +136,7 @@ function Hero() {
               <ArrowRight size={16} />
             </motion.a>
           </motion.div>
-          <motion.p variants={fadeUp} className="mt-5 text-sm text-slate-500">
-            হোয়াটসঅ্যাপ {WHATSAPP.number} · মাসে ৫০০ টাকা থেকে
-          </motion.p>
+       
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 40, rotate: 2 }}
