@@ -1,10 +1,12 @@
-import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowRight,
   BadgeCheck,
   Boxes,
   Check,
   LayoutDashboard,
+  Menu,
   MessageCircle,
   Package,
   Percent,
@@ -12,6 +14,7 @@ import {
   Store,
   Truck,
   Wallet,
+  X,
 } from 'lucide-react'
 import ImageSlot from './components/ImageSlot'
 import {
@@ -69,6 +72,32 @@ function WhatsAppButton({ children, className = '' }) {
 }
 
 function Nav() {
+  const [open, setOpen] = useState(false)
+
+  const links = [
+    { href: '#features', label: 'ফিচার' },
+    { href: '#pricing', label: 'প্যাকেজ' },
+    { href: '#ai', label: 'এআই' },
+    { href: '#demo', label: 'ডেমো' },
+  ]
+
+  // close the mobile menu if the viewport grows to desktop
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 768) setOpen(false)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
+  // prevent body scroll when mobile menu is open (optional nicety)
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
     <motion.header
       initial={{ y: -24, opacity: 0 }}
@@ -76,25 +105,86 @@ function Nav() {
       transition={{ duration: 0.5, ease }}
       className="sticky top-0 z-40 border-b border-teal-900/5 bg-[#fbfaf7]/85 backdrop-blur-md"
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3.5">
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-sm font-extrabold text-white">L</span>
-          <span className="text-[15px] font-bold tracking-tight">Lite Ecommerce</span>
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-5 sm:py-3.5">
+        {/* Logo */}
+        <a
+          href="#top"
+          onClick={() => setOpen(false)}
+          className="flex shrink-0 items-center gap-2.5"
+        >
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-700 text-sm font-extrabold text-white">
+            L
+          </span>
+          <span className="text-sm font-bold tracking-tight sm:text-[15px]">
+            Lite Ecommerce
+          </span>
         </a>
+
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-7 text-sm font-medium text-slate-600 md:flex">
-          <a href="#features" className="hover:text-teal-800">ফিচার</a>
-          <a href="#pricing" className="hover:text-teal-800">প্যাকেজ</a>
-          <a href="#ai" className="hover:text-teal-800">এআই</a>
-          <a href="#demo" className="hover:text-teal-800">ডেমো</a>
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="hover:text-teal-800">
+              {l.label}
+            </a>
+          ))}
         </nav>
-        <WhatsAppButton>ডেমোর জন্য যোগাযোগ</WhatsAppButton>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:block">
+          <WhatsAppButton>ডেমোর জন্য যোগাযোগ</WhatsAppButton>
+        </div>
+
+        {/* Mobile: short CTA + hamburger */}
+        <div className="flex items-center gap-2 md:hidden">
+          <WhatsAppButton className="!px-3.5 !py-2 !text-xs">
+            ডেমো
+          </WhatsAppButton>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-label="মেনু"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-300 bg-white text-slate-700 transition-colors hover:border-teal-700 hover:text-teal-800"
+          >
+            {open ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.nav
+            id="mobile-menu"
+            key="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease }}
+            className="overflow-hidden border-t border-teal-900/5 bg-[#fbfaf7] md:hidden"
+          >
+            <div className="mx-auto flex max-w-6xl flex-col px-4 py-2">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-lg px-2 py-3 text-sm font-medium text-slate-700 hover:bg-teal-50 hover:text-teal-800"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }
 
 function Hero() {
-  const lines = ['আপনার ব্যবসা পরিচালনা করুন সহজে।', 'বিক্রি, ডেলিভারি আর হিসাব সব একসাথে।']
+  const lines = ['আপনার অনলাইন ব্যবসা পরিচালনা করুন সহজে।', 'বিক্রি, ডেলিভারি আর হিসাব সব একসাথে।']
   return (
     <section id="top" className="relative overflow-hidden">
       <motion.div
@@ -111,17 +201,28 @@ function Hero() {
       />
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20">
         <motion.div initial="hidden" animate="show" variants={stagger}>
-          <motion.p variants={fadeUp} className="mb-4 inline-flex items-center gap-2 rounded-full bg-teal-700/10 px-3 py-1 text-xs font-semibold tracking-wide text-teal-800">
+          <motion.p
+            variants={fadeUp}
+            className="mb-4 inline-flex items-center gap-2 rounded-full bg-teal-700/10 px-3 py-1 text-xs font-semibold tracking-wide text-teal-800"
+          >
             বাংলাদেশের খুচরা দোকানের জন্য
           </motion.p>
-          <motion.h1 variants={headline} initial="hidden" animate="show" className="text-4xl font-extrabold leading-[1.18] tracking-tight text-slate-950 sm:text-5xl lg:text-[52px]">
+          <motion.h1
+            variants={headline}
+            initial="hidden"
+            animate="show"
+            className="text-4xl font-extrabold leading-[1.18] tracking-tight text-slate-950 sm:text-5xl lg:text-[52px]"
+          >
             {lines.map((line) => (
               <motion.span key={line} variants={word} className="block">
                 {line}
               </motion.span>
             ))}
           </motion.h1>
-          <motion.p variants={fadeUp} className="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
+          <motion.p
+            variants={fadeUp}
+            className="mt-5 max-w-xl text-base leading-8 text-slate-600 sm:text-lg"
+          >
             Lite Ecommerce বাংলাদেশের দোকানের কথা মাথায় রেখে বানানো। নিজের ব্র্যান্ডের স্টোর চালু করুন, ক্যাশ অন ডেলিভারি নিন, Steadfast দিয়ে পার্সেল পাঠান, আর আসল লাভটা হিসাব করুন — আলাদা আলাদা সফটওয়্যার জোড়া লাগাতে হয় না।
           </motion.p>
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-3">
@@ -136,7 +237,6 @@ function Hero() {
               <ArrowRight size={16} />
             </motion.a>
           </motion.div>
-       
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 40, rotate: 2 }}
@@ -160,7 +260,9 @@ function Stage() {
     <section className="border-y border-teal-900/5 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-16">
         <p className="text-xs font-semibold tracking-wide text-teal-700">এখন যা চালু আছে</p>
-        <h2 className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight leading-snug">দোকান খুলে বিক্রি শুরু করার মতো প্ল্যাটফর্ম।</h2>
+        <h2 className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight leading-snug">
+          দোকান খুলে বিক্রি শুরু করার মতো প্ল্যাটফর্ম।
+        </h2>
         <p className="mt-3 max-w-2xl text-slate-600 leading-7">
           প্রতিশ্রুতি নয় — যে কাজগুলো আজই করা যায়, সেগুলোই নিচে। লোগো বসান, প্রোডাক্ট তুলুন, অর্ডার নিন।
         </p>
@@ -195,8 +297,12 @@ function Pricing() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="text-xs font-semibold tracking-wide text-teal-700">প্যাকেজ</p>
-          <h2 className="mt-2 text-3xl font-extrabold tracking-tight">দাম সোজা। টাকায়। লুকানো চার্জ নেই।</h2>
-          <p className="mt-2 max-w-xl text-slate-600 leading-7">মাসিক আর বাৎসরিক — দুটোতেই এখনকার পুরো প্ল্যাটফর্ম আছে। সিদ্ধান্ত নিতে হিসাব মিলিয়ে নিন।</p>
+          <h2 className="mt-2 text-3xl font-extrabold tracking-tight">
+            দাম সোজা। টাকায়। লুকানো চার্জ নেই।
+          </h2>
+          <p className="mt-2 max-w-xl text-slate-600 leading-7">
+            মাসিক আর বাৎসরিক — দুটোতেই এখনকার পুরো প্ল্যাটফর্ম আছে। সিদ্ধান্ত নিতে হিসাব মিলিয়ে নিন।
+          </p>
         </div>
         <WhatsAppButton>প্যাকেজ নিয়ে জিজ্ঞাসা করুন</WhatsAppButton>
       </div>
@@ -220,13 +326,19 @@ function Pricing() {
                 {pkg.badge}
               </span>
             ) : null}
-            <p className={`text-sm font-semibold ${pkg.highlight ? 'text-teal-100' : 'text-teal-800'}`}>{pkg.name}</p>
+            <p className={`text-sm font-semibold ${pkg.highlight ? 'text-teal-100' : 'text-teal-800'}`}>
+              {pkg.name}
+            </p>
             <p className="mt-3 flex items-end gap-1">
               <span className="text-4xl font-extrabold tracking-tight">{pkg.price}</span>
               {pkg.unit ? <span className="mb-1 text-sm opacity-80">{pkg.unit}</span> : null}
             </p>
-            <p className={`mt-1 text-sm ${pkg.highlight ? 'text-teal-100' : 'text-slate-500'}`}>{pkg.billing}</p>
-            <p className={`mt-4 flex-1 text-sm leading-7 ${pkg.highlight ? 'text-teal-50' : 'text-slate-600'}`}>{pkg.who}</p>
+            <p className={`mt-1 text-sm ${pkg.highlight ? 'text-teal-100' : 'text-slate-500'}`}>
+              {pkg.billing}
+            </p>
+            <p className={`mt-4 flex-1 text-sm leading-7 ${pkg.highlight ? 'text-teal-50' : 'text-slate-600'}`}>
+              {pkg.who}
+            </p>
             <a
               href={WHATSAPP.href}
               target="_blank"
@@ -242,7 +354,9 @@ function Pricing() {
       </div>
       <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6">
         <h3 className="text-lg font-bold">প্রতিটি প্যাকেজে যা পাবেন</h3>
-        <p className="mt-1 text-sm text-slate-500">মাসিক আর বাৎসরিক — একই ফিচার। কম টাকায় কম ফিচার নয়।</p>
+        <p className="mt-1 text-sm text-slate-500">
+          মাসিক আর বাৎসরিক — একই ফিচার। কম টাকায় কম ফিচার নয়।
+        </p>
         <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {included.map((item) => (
             <li key={item} className="flex items-start gap-2 text-sm text-slate-700">
@@ -279,7 +393,9 @@ function Features() {
     <section id="features" className="border-y border-teal-900/5 bg-white">
       <div className="mx-auto max-w-6xl px-5 py-20">
         <p className="text-xs font-semibold tracking-wide text-teal-700">পুরো ফিচার তালিকা</p>
-        <h2 className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight leading-snug">এখন যা আছে, সেটাই নিচে। বাড়িয়ে বলা নেই।</h2>
+        <h2 className="mt-2 max-w-2xl text-3xl font-extrabold tracking-tight leading-snug">
+          এখন যা আছে, সেটাই নিচে। বাড়িয়ে বলা নেই।
+        </h2>
         <div className="mt-14 space-y-20">
           {featureBlocks.map((block, i) => {
             const Icon = icons[i]
@@ -291,14 +407,18 @@ function Features() {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.25 }}
                 variants={stagger}
-                className={`grid items-center gap-10 lg:grid-cols-2 ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}
+                className={`grid items-center gap-10 lg:grid-cols-2 ${
+                  reverse ? 'lg:[&>*:first-child]:order-2' : ''
+                }`}
               >
                 <motion.div variants={fadeUp}>
                   <p className="inline-flex items-center gap-2 text-xs font-semibold tracking-wide text-amber-700">
                     <Icon size={14} />
                     {block.eyebrow}
                   </p>
-                  <h3 className="mt-3 text-2xl font-extrabold tracking-tight leading-snug">{block.title}</h3>
+                  <h3 className="mt-3 text-2xl font-extrabold tracking-tight leading-snug">
+                    {block.title}
+                  </h3>
                   <p className="mt-3 text-[15px] leading-8 text-slate-600">{block.text}</p>
                   <ul className="mt-5 space-y-2">
                     {block.points.map((point) => (
@@ -336,7 +456,9 @@ function Ai() {
             <Sparkles size={14} />
             এআই প্রোডাক্ট তৈরি
           </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight leading-snug">একটা ছবি থেকে লিস্টিং।</h2>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight leading-snug">
+            একটা ছবি থেকে লিস্টিং।
+          </h2>
           <p className="mt-3 text-slate-600 leading-8">
             অ্যাডমিনে /admin/products/new এ যান। প্রোডাক্টের একটা ছবি আপলোড করুন। এজেন্ট ব্যাকগ্রাউন্ড সরাতে পারে, স্টোরের লোগো বসাতে পারে, আর ইংরেজি বা বাংলায় শিরোনাম, বিবরণ ও কিওয়ার্ড তৈরি করে। পাবলিশের আগে এসইও স্কোর দেখা যায়। ড্রাফট রেখে পরে পাবলিশ করুন — তাড়াহুড়ো করে লাইভ করতে হয় না।
           </p>
@@ -379,7 +501,9 @@ function Cta() {
         >
           <Package className="mx-auto mb-4 text-amber-300" />
         </motion.div>
-        <h2 className="text-3xl font-extrabold tracking-tight leading-snug sm:text-4xl">Lite Ecommerce লাইভ দেখে নিন।</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight leading-snug sm:text-4xl">
+          Lite Ecommerce লাইভ দেখে নিন।
+        </h2>
         <p className="mx-auto mt-3 max-w-xl text-teal-50 leading-8">
           হোয়াটসঅ্যাপে মেসেজ দিন। স্টোরফ্রন্ট, অ্যাডমিন, Steadfast, এসএমএস আর এআই প্রোডাক্ট তৈরি — এক কলে ঘুরে দেখাব। কোনো বাধ্যবাধকতা নেই।
         </p>
@@ -398,7 +522,9 @@ function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-sm font-extrabold">L</span>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal-600 text-sm font-extrabold">
+              L
+            </span>
             <span className="text-[15px] font-bold tracking-tight">Lite Ecommerce</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">
