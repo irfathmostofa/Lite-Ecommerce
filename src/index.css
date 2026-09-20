@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Hind Siliguri", ui-sans-serif, system-ui, sans-serif;
+  --color-brand: #0f766e;
+  --color-brand-dark: #115e59;
+  --color-ink: #0b1220;
+  --color-muted: #5b6578;
+  --color-sand: #f4f1ea;
+  --color-gold: #d97706;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: #fbfaf7;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #99f6e4;
+  color: #134e4a;
+}
