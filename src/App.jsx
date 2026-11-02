@@ -248,7 +248,7 @@ function Hero() {
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ImageSlot label="স্টোরফ্রন্টের ছবি" image={images.storefront} ratio="aspect-[5/4]" />
+            <ImageSlot label="স্টোরফ্রন্টের ছবি" image={images.hero} ratio="aspect-[5/4]" />
           </motion.div>
         </motion.div>
       </div>
@@ -474,7 +474,7 @@ function Ai() {
         </motion.div>
         <motion.div variants={fadeLeft} className="grid gap-4">
           <ImageSlot label="এআই প্রোডাক্ট তৈরির ছবি" image={images.aiUpload} />
-          <ImageSlot label="এআই জেনারেটেড লিস্টিং" image={images.aiListing} />
+          {/* <ImageSlot label="এআই জেনারেটেড লিস্টিং" image={images.aiListing} /> */}
         </motion.div>
       </motion.div>
     </section>

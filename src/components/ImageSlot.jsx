@@ -7,7 +7,7 @@ export default function ImageSlot({ label, image, className = '', ratio = 'aspec
         <img
           src={image}
           alt={label}
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-fill object-top"
         />
       </div>
     )

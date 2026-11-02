@@ -8,6 +8,7 @@ import logisticsPanel from './assets/7.jpeg'
 import contactSettings from './assets/8.jpeg'
 import aiUpload from './assets/9.jpeg'
 import aiListing from './assets/10.jpeg'
+import hero from './assets/11.jpeg'
 
 export const images = {
   storefront,
@@ -19,7 +20,7 @@ export const images = {
   logisticsPanel,
   contactSettings,
   aiUpload,
-  aiListing,
+  hero
 }
 
 export const WHATSAPP = {
