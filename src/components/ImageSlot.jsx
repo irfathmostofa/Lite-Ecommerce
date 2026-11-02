@@ -1,4 +1,18 @@
-export default function ImageSlot({ label,images, className = '', ratio = 'aspect-[16/10]' }) {
+export default function ImageSlot({ label, image, className = '', ratio = 'aspect-[16/10]' }) {
+  if (image) {
+    return (
+      <div
+        className={`relative overflow-hidden rounded-2xl border border-teal-800/15 bg-white shadow-[0_18px_40px_rgba(15,118,110,0.10)] ${ratio} ${className}`}
+      >
+        <img
+          src={image}
+          alt={label}
+          className="h-full w-full object-cover object-top"
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       className={`relative overflow-hidden rounded-2xl border border-dashed border-teal-800/20 bg-gradient-to-br from-teal-50 via-white to-amber-50 ${ratio} ${className}`}
@@ -13,7 +27,6 @@ export default function ImageSlot({ label,images, className = '', ratio = 'aspec
           </svg>
         </div>
         <p className="text-sm font-semibold text-teal-900">{label}</p>
-        <p className="max-w-xs text-xs leading-5 text-slate-500">পরে এখানে স্ক্রিনশট বা ছবি বসান।</p>
       </div>
     </div>
   )

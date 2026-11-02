@@ -1,9 +1,26 @@
-import storefront from './assets/1.jpeg'
-import catalog from './assets/2.jpeg'
-import promotions from './assets/3.jpeg'
-import admin from './assets/4.jpeg'
-import logistics from './assets/5.jpeg'
-import comms from './assets/6.jpeg'
+import adminDash from './assets/1.jpeg'
+import appearance from './assets/2.jpeg'
+import storefront from './assets/3.jpeg'
+import productPage from './assets/4.jpeg'
+import flashSale from './assets/5.jpeg'
+import salesReport from './assets/6.jpeg'
+import logisticsPanel from './assets/7.jpeg'
+import contactSettings from './assets/8.jpeg'
+import aiUpload from './assets/9.jpeg'
+import aiListing from './assets/10.jpeg'
+
+export const images = {
+  storefront,
+  appearance,
+  productPage,
+  flashSale,
+  adminDash,
+  salesReport,
+  logisticsPanel,
+  contactSettings,
+  aiUpload,
+  aiListing,
+}
 
 export const WHATSAPP = {
   number: '+8801941637656',
@@ -120,8 +137,8 @@ export const featureBlocks = [
       'ফিচার্ড ফ্ল্যাগ, চালু বা বন্ধ',
       'SKU, স্টক আর ভ্যারিয়েন্ট গ্রুপ',
     ],
-    imageLabel: 'প্রোডাক্ট অ্যাডমিনের ছবি',
-    image: catalog,
+    imageLabel: 'প্রোডাক্ট পেজের ছবি',
+    image: productPage,
   },
   {
     id: 'promotions',
@@ -135,8 +152,8 @@ export const featureBlocks = [
       'সাবটোটাল অনুযায়ী স্বয়ংক্রিয় কার্ট রুল',
       'আলাদা সেল ল্যান্ডিং পেজ',
     ],
-    imageLabel: 'ক্যাম্পেইন পেজের ছবি',
-    image: promotions,
+    imageLabel: 'ফ্ল্যাশ সেলের ছবি',
+    image: flashSale,
   },
   {
     id: 'admin',
@@ -151,7 +168,7 @@ export const featureBlocks = [
       'কাস্টমার হিস্টোরি ও বাল্ক এসএমএস',
     ],
     imageLabel: 'অ্যাডমিন ড্যাশবোর্ডের ছবি',
-    image: admin,
+    image: adminDash,
   },
   {
     id: 'logistics',
@@ -166,7 +183,7 @@ export const featureBlocks = [
       'Packzy-রেডি লজিস্টিকস মডিউল',
     ],
     imageLabel: 'লজিস্টিকস প্যানেলের ছবি',
-    image: logistics,
+    image: logisticsPanel,
   },
   {
     id: 'comms',
@@ -180,8 +197,8 @@ export const featureBlocks = [
       'অ্যাডমিন কপি অর্ডার ইমেইলে',
       'চাইলে ভাসমান চ্যাট বাটন',
     ],
-    imageLabel: 'এসএমএস ও ইমেইলের ছবি',
-    image: comms,
+    imageLabel: 'কন্টাক্ট ও সেটিংসের ছবি',
+    image: contactSettings,
   },
 ]
 

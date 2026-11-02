@@ -26,6 +26,7 @@ import {
   packages,
   stageSteps,
   aiPoints,
+  images,
 } from './data'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -247,7 +248,7 @@ function Hero() {
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <ImageSlot label="স্টোরফ্রন্টের ছবি" ratio="aspect-[5/4]" />
+            <ImageSlot label="স্টোরফ্রন্টের ছবি" image={images.storefront} ratio="aspect-[5/4]" />
           </motion.div>
         </motion.div>
       </div>
@@ -381,7 +382,7 @@ function Pricing() {
             ))}
           </ul>
         </div>
-        <ImageSlot label="আপনার ব্র্যান্ডের স্টোর" />
+        <ImageSlot label="আপনার ব্র্যান্ডের স্টোর" image={images.appearance} />
       </div>
     </section>
   )
@@ -430,7 +431,7 @@ function Features() {
                   </ul>
                 </motion.div>
                 <motion.div variants={fadeLeft} whileHover={{ scale: 1.02 }}>
-                  <ImageSlot label={block.imageLabel} />
+                  <ImageSlot label={block.imageLabel} image={block.image} />
                 </motion.div>
               </motion.div>
             )
@@ -471,8 +472,9 @@ function Ai() {
             ))}
           </ul>
         </motion.div>
-        <motion.div variants={fadeLeft} whileHover={{ scale: 1.02 }}>
-          <ImageSlot label="এআই প্রোডাক্ট তৈরির ছবি" />
+        <motion.div variants={fadeLeft} className="grid gap-4">
+          <ImageSlot label="এআই প্রোডাক্ট তৈরির ছবি" image={images.aiUpload} />
+          <ImageSlot label="এআই জেনারেটেড লিস্টিং" image={images.aiListing} />
         </motion.div>
       </motion.div>
     </section>
