@@ -1,3 +1,10 @@
+import storefront from './assets/1.jpeg'
+import catalog from './assets/2.jpeg'
+import promotions from './assets/3.jpeg'
+import admin from './assets/4.jpeg'
+import logistics from './assets/5.jpeg'
+import comms from './assets/6.jpeg'
+
 export const WHATSAPP = {
   number: '+8801941637656',
   href: 'https://wa.me/8801941637656?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%20Lite%20Ecommerce%20%E0%A6%8F%E0%A6%B0%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BE%20%E0%A6%A1%E0%A7%87%E0%A6%AE%E0%A7%8B%20%E0%A6%A6%E0%A7%87%E0%A6%96%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87',
@@ -99,6 +106,7 @@ export const featureBlocks = [
       'কুপন, কার্ট রুল আর ট্র্যাকিং কোড',
     ],
     imageLabel: 'স্টোরফ্রন্টের ছবি',
+    image: storefront,
   },
   {
     id: 'catalog',
@@ -113,6 +121,7 @@ export const featureBlocks = [
       'SKU, স্টক আর ভ্যারিয়েন্ট গ্রুপ',
     ],
     imageLabel: 'প্রোডাক্ট অ্যাডমিনের ছবি',
+    image: catalog,
   },
   {
     id: 'promotions',
@@ -127,6 +136,7 @@ export const featureBlocks = [
       'আলাদা সেল ল্যান্ডিং পেজ',
     ],
     imageLabel: 'ক্যাম্পেইন পেজের ছবি',
+    image: promotions,
   },
   {
     id: 'admin',
@@ -141,6 +151,7 @@ export const featureBlocks = [
       'কাস্টমার হিস্টোরি ও বাল্ক এসএমএস',
     ],
     imageLabel: 'অ্যাডমিন ড্যাশবোর্ডের ছবি',
+    image: admin,
   },
   {
     id: 'logistics',
@@ -155,6 +166,7 @@ export const featureBlocks = [
       'Packzy-রেডি লজিস্টিকস মডিউল',
     ],
     imageLabel: 'লজিস্টিকস প্যানেলের ছবি',
+    image: logistics,
   },
   {
     id: 'comms',
@@ -169,6 +181,7 @@ export const featureBlocks = [
       'চাইলে ভাসমান চ্যাট বাটন',
     ],
     imageLabel: 'এসএমএস ও ইমেইলের ছবি',
+    image: comms,
   },
 ]
 

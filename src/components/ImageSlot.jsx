@@ -1,4 +1,4 @@
-export default function ImageSlot({ label, className = '', ratio = 'aspect-[16/10]' }) {
+export default function ImageSlot({ label,images, className = '', ratio = 'aspect-[16/10]' }) {
   return (
     <div
       className={`relative overflow-hidden rounded-2xl border border-dashed border-teal-800/20 bg-gradient-to-br from-teal-50 via-white to-amber-50 ${ratio} ${className}`}
