@@ -200,7 +200,7 @@ function Hero() {
         animate={{ x: [0, -18, 0], y: [0, 22, 0] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
-      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-20">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-10">
         <motion.div initial="hidden" animate="show" variants={stagger}>
           <motion.p
             variants={fadeUp}
