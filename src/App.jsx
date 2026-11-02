@@ -206,7 +206,7 @@ function Hero() {
             variants={fadeUp}
             className="mb-4 inline-flex items-center gap-2 rounded-full bg-teal-700/10 px-3 py-1 text-xs font-semibold tracking-wide text-teal-800"
           >
-            বাংলাদেশের খুচরা দোকানের জন্য
+            বাংলাদেশের অনলাইন ব্যবসার জন্য
           </motion.p>
           <motion.h1
             variants={headline}
@@ -530,7 +530,7 @@ function Footer() {
             <span className="text-[15px] font-bold tracking-tight">Lite Ecommerce</span>
           </div>
           <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">
-            বাংলাদেশের খুচরা দোকানের জন্য স্টোর প্ল্যাটফর্ম। স্টোরফ্রন্ট, অ্যাডমিন, কুরিয়ার, এসএমএস, প্রমোশন, রিপোর্ট আর এআই প্রোডাক্ট তৈরি — এক জায়গায়।
+            বাংলাদেশের অনলাইন ব্যবসার জন্য স্টোর প্ল্যাটফর্ম। স্টোরফ্রন্ট, অ্যাডমিন, কুরিয়ার, এসএমএস, প্রমোশন, রিপোর্ট আর এআই প্রোডাক্ট তৈরি — এক জায়গায়।
           </p>
           <a
             href={WHATSAPP.href}
